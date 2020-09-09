@@ -1,0 +1,14 @@
+<!-- creates search box for system -->
+<div id="search-component">
+    <h4><label for="search-box">Character Search</label></h4>
+  
+    <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+  
+    <ul class="search-result">
+      <li *ngFor="let char of characters$ | async" >
+        <a routerLink="/detail/{{character.id}}">
+          {{character.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
