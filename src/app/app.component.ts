@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'swquery';
+
+  // sets the title for the page
+  title = 'Star Wars Character Search';
 }
