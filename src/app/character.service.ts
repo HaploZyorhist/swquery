@@ -39,7 +39,7 @@ export class CharacterService {
       }
       //term = term.trim();
       
-      return this.http.get<Character[]>(`${this.characterUrl}?search=${term}`).pipe(tap(x => x.length?
+      return this.http.get<Character[]>(`${this.characterUrl}/?search=${term}`).pipe(tap(x => x.length?
         this.log(`found characters matching "${term}"`) :
         this.log(`Sorry, cant find a character matching "${term}"`)),
         catchError(this.handleError<Character[]>('searchChar', [])));
