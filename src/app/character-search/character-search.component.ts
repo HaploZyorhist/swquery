@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Character } from '../character';
 import { CharacterService } from '../character.service';
@@ -15,6 +15,7 @@ export class CharacterSearchComponent implements OnInit {
 
   // sets characters$ as an observable
   character$: Observable<Character[]>;
+  private subscriptions: Subscription[] = [];
 
   // sets private method for searching
   private searchTerms = new Subject<string>();
@@ -39,7 +40,9 @@ export class CharacterSearchComponent implements OnInit {
 
       // switch to new search if the term changed
       switchMap((term: string) => this.characterService.searchChar(term)),
-    );
+    )
+    
+    this.character$.subscribe(x => console.log(x));
   }
 
 }

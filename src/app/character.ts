@@ -4,6 +4,6 @@ export interface Character {
     name: string;
     homeworld: string;
     species: string;
-    films: string;
+    films: string[];
     gender: string;
 }

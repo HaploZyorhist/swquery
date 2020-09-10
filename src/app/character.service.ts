@@ -35,22 +35,23 @@ export class CharacterService {
       if (!term.trim()) {
         // if no match, return nothing
         return of([]);
-        console.log();
+        //console.log();
       }
-      //term = term.trim();
-      
-      return this.http.get<Character[]>(`${this.characterUrl}/?search=${term}`).pipe(tap(x => x.length?
-        this.log(`found characters matching "${term}"`) :
-        this.log(`Sorry, cant find a character matching "${term}"`)),
+
+     
+      return this.http.get<Character[]>(`${this.characterUrl}/?search=${term}`).pipe(
+          map(characters => Character[0]),
+            tap(x => {
+              const outcome = x ? 'character found' : 'could not find'
+              this.log(`${outcome} character name = ${term}`);
+            }),
         catchError(this.handleError<Character[]>('searchChar', [])));
-
-      //return this.http.jsonp<Character[]>(this.characterUrl, `$search=${term}`).pipe(catchError(this.handleError<Character[]>('searchCharacter', [])));
-
     }
 
     // should handle faild Http pulls while allowing hte app to continue working
     // @param operation - names the failed operation
     // @param result - should return observable result
+
     private handleError<T>(operation = 'operation' , result?: T) {
       return (error: any): Observable<T> => {
 
