@@ -14,7 +14,7 @@ import { CharacterService } from '../character.service';
 export class CharacterSearchComponent implements OnInit {
 
   // sets characters$ as an observable
-  characters$: Observable<Character[]>;
+  character$: Observable<Character[]>;
 
   // sets private method for searching
   private searchTerms = new Subject<string>();
@@ -30,7 +30,7 @@ export class CharacterSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.characters$ = this.searchTerms.pipe(
+    this.character$ = this.searchTerms.pipe(
       // wait after keystroacks to reduce frequent http pull attempts
       debounceTime(300),
 

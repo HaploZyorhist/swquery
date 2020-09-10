@@ -10,7 +10,7 @@ import { Character } from '../character';
 export class CharacterComponent implements OnInit {
 
   // sets char array
-  char: Character[];
+  characters: Character[];
 
   constructor() { }
 

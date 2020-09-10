@@ -32,16 +32,19 @@ export class CharacterService {
 
     // get characters whose name contains search criteria
     searchChar(term: string): Observable<Character[]> {
-      if (!term.trim()) {
+      //if (!term.trim()) {
         // if no match, return nothing
-        return of([]);
-        console.log();
-      }
+        //return of([]);
+        //console.log();
+      //}
+      term = term.trim();
       
-      return this.http.get<Character[]>(`${this.characterUrl}/?search=${term}`).pipe(tap(x => x.length?
-        this.log(`found characters matching "${term}"`) :
-        this.log(`Sorry, cant find a character matching "${term}"`)),
-        catchError(this.handleError<Character[]>('searchCharacter', [])));
+      //return this.http.get<Character[]>(`${this.characterUrl}?search=${term}`).pipe(tap(x => x.length?
+      //  this.log(`found characters matching "${term}"`) :
+      //  this.log(`Sorry, cant find a character matching "${term}"`)),
+      //  catchError(this.handleError<Character[]>('searchCharacter', [])));
+
+      return this.http.jsonp<Character[]>(this.characterUrl, `$search=${term}`).pipe(catchError(this.handleError<Character[]>('searchCharacter', [])));
 
     }
 

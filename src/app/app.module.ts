@@ -1,9 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-// enables http services
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CharacterComponent } from './character/character.component';
@@ -22,6 +19,7 @@ import { CharacterSearchComponent } from './character-search/character-search.co
   imports: [
     HttpClientModule,
     BrowserModule,
+    HttpClientJsonpModule,
     AppRoutingModule
   ],
   providers: [],
