@@ -22,7 +22,7 @@ export class CharacterService {
     }
 
     // sets url for character search
-    private characterUrl = 'https://swapi.dev/api/';
+    private characterUrl = 'https://swapi.dev/api/people';
 
     // pulls characters from the server
     // adds message to message injection to identify that characters were pulled or sends error message if failed
@@ -35,11 +35,12 @@ export class CharacterService {
       if (!term.trim()) {
         // if no match, return nothing
         return of([]);
+        console.log();
       }
       
-      return this.http.get<Character[]>(`${this.characterUrl}/?name=${term}`).pipe(tap(x => x.length?
+      return this.http.get<Character[]>(`${this.characterUrl}/?search=${term}`).pipe(tap(x => x.length?
         this.log(`found characters matching "${term}"`) :
-        this.log(`no heroes matching "${term}"`)),
+        this.log(`Sorry, cant find a character matching "${term}"`)),
         catchError(this.handleError<Character[]>('searchCharacter', [])));
 
     }
