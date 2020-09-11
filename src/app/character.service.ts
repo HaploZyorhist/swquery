@@ -25,7 +25,6 @@ export class CharacterService {
     // sets url for character search
     private characterUrl = 'https://swapi.dev/api/people';
 
-
     // pulls characters from the server
     // adds message to message injection to identify that characters were pulled or sends error message if failed
     getChars(): Observable<Character[]>{
@@ -48,7 +47,6 @@ export class CharacterService {
             this.log(`no heroes matching "${term}"`)),
         catchError(this.handleError<Character[]>('searchChar', []))
         )
-
     }
 
     // should handle faild Http pulls while allowing hte app to continue working
