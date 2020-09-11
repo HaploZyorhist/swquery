@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Character } from './character';
+import { Homeworld } from './homeworld';
 import { MessageService } from './message.service';
 
 @Injectable({
@@ -24,6 +25,7 @@ export class CharacterService {
     // sets url for character search
     private characterUrl = 'https://swapi.dev/api/people';
 
+
     // pulls characters from the server
     // adds message to message injection to identify that characters were pulled or sends error message if failed
     getChars(): Observable<Character[]>{
@@ -38,14 +40,15 @@ export class CharacterService {
         //console.log();
       }
 
-     
+      // after much brain ache, was able to get map() working
       return this.http.get<Character[]>(`${this.characterUrl}/?search=${term}`).pipe(
-          map(characters => Character[0]),
-            tap(x => {
-              const outcome = x ? 'character found' : 'could not find'
-              this.log(`${outcome} character name = ${term}`);
-            }),
-        catchError(this.handleError<Character[]>('searchChar', [])));
+          map(resp => resp['results']),
+          tap(x => x.length ?
+            this.log(`found heroes matching "${term}"`) :
+            this.log(`no heroes matching "${term}"`)),
+        catchError(this.handleError<Character[]>('searchChar', []))
+        )
+
     }
 
     // should handle faild Http pulls while allowing hte app to continue working

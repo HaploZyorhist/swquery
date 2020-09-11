@@ -6,9 +6,12 @@
   
     <ul class="search-result">
         <li *ngFor="let character of character$ | async" >
-            <a routerLink="{{character.url}}">
-                {{character.name}}
-            </a>
+                {{character.name}}<br>
+                Gender {{character.gender | uppercase}}<br>
+                Born {{character.birth_year}}<br>
+                {{character.homeworld}}<br>
+                {{character.films}}
+                <br><br>
         </li>
     </ul>
   </div>

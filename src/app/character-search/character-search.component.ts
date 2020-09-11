@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Character } from '../character';
+import { Homeworld } from '../homeworld';
 import { CharacterService } from '../character.service';
 
 @Component({
@@ -42,7 +43,7 @@ export class CharacterSearchComponent implements OnInit {
       switchMap((term: string) => this.characterService.searchChar(term)),
     )
     
-    this.character$.subscribe(x => console.log(x));
+    //this.character$.subscribe(x => console.log(x));
   }
 
 }
